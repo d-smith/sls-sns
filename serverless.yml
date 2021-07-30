@@ -1,0 +1,20 @@
+service: snstriggered
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  xt1:
+    handler: snshandler.handler
+    events:
+      - sns:
+          arn: !Ref MyTopic
+          topicName: MyTopic
+
+resources:
+  Resources:
+    MyTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: MyTopic
